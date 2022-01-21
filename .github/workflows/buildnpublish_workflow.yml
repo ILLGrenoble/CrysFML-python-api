@@ -147,7 +147,7 @@ jobs:
         
   Publish_Packages:
     runs-on: ubuntu-latest
-    needs: [Upload_Artifacts]
+    needs: [create-Linux, create-OSX, create-Windows]
     steps:
     - uses: actions/download-artifact@v2    
     - name: Publish distribution package to Test PyPI
@@ -155,5 +155,4 @@ jobs:
       with:
         password: ${{ secrets.TEST_PYPI_API_TOKEN }}
         repository_url: https://test.pypi.org/legacy/  
-        packages_dir: "./dist"
         verbose: true
