@@ -47,7 +47,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: CrysFML - Linux
-        path: ${{ github.workspace }}/dist/*.whl
+        path: ${{ github.workspace }}/dist/*manylinux2010_x86_64.whl
         
 #    - name: Publish distribution package to Test PyPI
 #     uses: pypa/gh-action-pypi-publish@master
