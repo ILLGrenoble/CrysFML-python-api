@@ -19,7 +19,7 @@ jobs:
     steps:
     - name: Checkout ILL repo
       run: |
-        git clone https://code.ill.fr/scientific-software/crysfml/ ./
+        git clone --branch release_pythonAPI https://code.ill.fr/scientific-software/crysfml/ ./
         git fetch --tags
         git tag --list
         rm -rf ./.git ./Html
