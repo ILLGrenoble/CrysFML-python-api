@@ -123,8 +123,8 @@ jobs:
         shell: bash -l {0}
         run: |
           conda install -c conda-forge fortran-compiler
-          pip install find_libpython delvewheel
-          pip wheel ./ --no-deps -w ./old/
+          pip -v install find_libpython delvewheel
+          pip -v wheel ./ --no-deps -w ./old/
           delvewheel repair --no-mangle-all -w dist -v ./old/*.whl
         env:
           FC: gfortran
