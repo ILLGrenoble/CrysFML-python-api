@@ -122,7 +122,7 @@ jobs:
       - name: Conda build
         shell: bash -l {0}
         run: |
-          conda install -c conda-forge gfortran
+          conda install -c conda-forge m2w64-gcc-libgfortran
           pip -v install find_libpython delvewheel
           pip -v wheel ./ --no-deps -w ./old/
           delvewheel repair --no-mangle-all -w dist -v ./old/*.whl
