@@ -125,7 +125,7 @@ jobs:
           conda install -c conda-forge m2w64-gcc-libgfortran
           pip -v install find_libpython delvewheel
           pip -v wheel ./ --no-deps -w ./old/
-          delvewheel repair --no-mangle-all -w dist -v ./old/*.whl
+          delvewheel repair --no-mangle-all -w dist -vv ./old/*.whl
         env:
           FC: gfortran
           CMAKE_GENERATOR: MinGW Makefiles
