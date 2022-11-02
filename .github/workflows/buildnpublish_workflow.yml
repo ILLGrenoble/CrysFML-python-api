@@ -108,7 +108,8 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     needs: get_Latest
-    
+    env:
+      F_PATH: ""
     steps:
       - uses: actions/download-artifact@v2
         with:
@@ -119,10 +120,20 @@ jobs:
           miniconda-version: "latest"
           activate-environment: foo
           python-version: ${{ matrix.python-version }}
+
+      - uses: msys2/setup-msys2@v2
+
+      - name: install fortran libraries
+        shell: msys2 {0}
+        run: |
+          pacman --noconfirm -S mingw-w64-x86_64-gcc-fortran
+          echo "F_PATH=$(echo `cygpath -w /mingw64/bin`)" >> $GITHUB_ENV
+
       - name: Conda build
         shell: bash -l {0}
         run: |
-          conda install -c conda-forge m2w64-gcc-libgfortran
+          export PATH="$F_PATH":$PATH
+          export LD_LIBRARY_PATH="$F_PATH":$LD_LIBRARY_PATH
           pip -v install find_libpython delvewheel
           pip -v wheel ./ --no-deps -w ./old/
           delvewheel repair --no-mangle-all -w dist -vv ./old/*.whl
